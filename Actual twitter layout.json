@@ -1,0 +1,390 @@
+{
+        "_id" : ObjectId("5c23657d7fd09d526413a58d"),
+        "delete" : {
+                "status" : {
+                        "id" : NumberLong("1010322227894484992"),
+                        "id_str" : "1010322227894484992",
+                        "user_id" : NumberLong("926387905794260992"),
+                        "user_id_str" : "926387905794260992"
+                },
+                "timestamp_ms" : "1545823095972"
+        }
+}
+{
+        "_id" : ObjectId("5c23657d7fd09d526413a58e"),
+        "created_at" : "Wed Dec 26 11:18:15 +0000 2018",
+        "id" : NumberLong("1077886303876853760"),
+        "id_str" : "1077886303876853760",
+        "text" : "मोहम्मद आमिर bowled डुएन ओलिवर 1 (15 गेंद) पाकिस्तान 96/7 (32.5 ओवर) #SAvPAK https://t.co/ApnvY0njpv https://t.co/sARTrxWWsO",
+        "display_text_range" : [
+                0,
+                100
+        ],
+        "source" : "<a href=\"http://khabar.ndtv.com\" rel=\"nofollow\">CricketKhabarLive</a>",
+        "truncated" : false,
+        "in_reply_to_status_id" : null,
+        "in_reply_to_status_id_str" : null,
+        "in_reply_to_user_id" : null,
+        "in_reply_to_user_id_str" : null,
+        "in_reply_to_screen_name" : null,
+        "user" : {
+                "id" : NumberLong("710825820189687808"),
+                "id_str" : "710825820189687808",
+                "name" : "एनडीटीवी लाइव स्कोर",
+                "screen_name" : "NDTVIndia_Live",
+                "location" : null,
+                "url" : null,
+                "description" : "जुड़ें अंतरराष्ट्रीय क्रिकेट जगत के लाइव एक्शन से...",
+                "translator_type" : "none",
+                "protected" : false,
+                "verified" : true,
+                "followers_count" : 5176,
+                "friends_count" : 0,
+                "listed_count" : 26,
+                "favourites_count" : 0,
+                "statuses_count" : 144501,
+                "created_at" : "Fri Mar 18 13:50:56 +0000 2016",
+                "utc_offset" : null,
+                "time_zone" : null,
+                "geo_enabled" : false,
+                "lang" : "en-gb",
+                "contributors_enabled" : false,
+                "is_translator" : false,
+                "profile_background_color" : "F5F8FA",
+                "profile_background_image_url" : "",
+                "profile_background_image_url_https" : "",
+                "profile_background_tile" : false,
+                "profile_link_color" : "1DA1F2",
+                "profile_sidebar_border_color" : "C0DEED",
+                "profile_sidebar_fill_color" : "DDEEF6",
+                "profile_text_color" : "333333",
+                "profile_use_background_image" : true,
+                "profile_image_url" : "http://pbs.twimg.com/profile_images/1041610079223504896/ifDdk9Ag_normal.jpg",
+                "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1041610079223504896/ifDdk9Ag_normal.jpg",
+                "default_profile" : true,
+                "default_profile_image" : false,
+                "following" : null,
+                "follow_request_sent" : null,
+                "notifications" : null
+        },
+        "geo" : null,
+        "coordinates" : null,
+        "place" : null,
+        "contributors" : null,
+        "is_quote_status" : false,
+        "quote_count" : 0,
+        "reply_count" : 0,
+        "retweet_count" : 0,
+        "favorite_count" : 0,
+        "entities" : {
+                "hashtags" : [
+                        {
+                                "text" : "SAvPAK",
+                                "indices" : [
+                                        69,
+                                        76
+                                ]
+                        }
+                ],
+                "urls" : [
+                        {
+                                "url" : "https://t.co/ApnvY0njpv",
+                                "expanded_url" : "https://sports.ndtv.com/hindi/cricket/live-scores/south-africa-vs-pakistan-1st-test-centurion-sapk12262018186648",
+                                "display_url" : "sports.ndtv.com/hindi/cricket/…",
+                                "indices" : [
+                                        77,
+                                        100
+                                ]
+                        }
+                ],
+                "user_mentions" : [ ],
+                "symbols" : [ ],
+                "media" : [
+                        {
+                                "id" : NumberLong("1077886302530486272"),
+                                "id_str" : "1077886302530486272",
+                                "indices" : [
+                                        101,
+                                        124
+                                ],
+                                "media_url" : "http://pbs.twimg.com/media/DvVr4ZqWwAAwh8f.jpg",
+                                "media_url_https" : "https://pbs.twimg.com/media/DvVr4ZqWwAAwh8f.jpg",
+                                "url" : "https://t.co/sARTrxWWsO",
+                                "display_url" : "pic.twitter.com/sARTrxWWsO",
+                                "expanded_url" : "https://twitter.com/NDTVIndia_Live/status/1077886303876853760/photo/1",
+                                "type" : "photo",
+                                "sizes" : {
+                                        "thumb" : {
+                                                "w" : 150,
+                                                "h" : 150,
+                                                "resize" : "crop"
+                                        },
+                                        "medium" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        },
+                                        "small" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        },
+                                        "large" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        }
+                                }
+                        }
+                ]
+        },
+        "extended_entities" : {
+                "media" : [
+                        {
+                                "id" : NumberLong("1077886302530486272"),
+                                "id_str" : "1077886302530486272",
+                                "indices" : [
+                                        101,
+                                        124
+                                ],
+                                "media_url" : "http://pbs.twimg.com/media/DvVr4ZqWwAAwh8f.jpg",
+                                "media_url_https" : "https://pbs.twimg.com/media/DvVr4ZqWwAAwh8f.jpg",
+                                "url" : "https://t.co/sARTrxWWsO",
+                                "display_url" : "pic.twitter.com/sARTrxWWsO",
+                                "expanded_url" : "https://twitter.com/NDTVIndia_Live/status/1077886303876853760/photo/1",
+                                "type" : "photo",
+                                "sizes" : {
+                                        "thumb" : {
+                                                "w" : 150,
+                                                "h" : 150,
+                                                "resize" : "crop"
+                                        },
+                                        "medium" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        },
+                                        "small" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        },
+                                        "large" : {
+                                                "w" : 530,
+                                                "h" : 350,
+                                                "resize" : "fit"
+                                        }
+                                }
+                        }
+                ]
+        },
+        "favorited" : false,
+        "retweeted" : false,
+        "possibly_sensitive" : false,
+        "filter_level" : "low",
+        "lang" : "mr",
+        "timestamp_ms" : "1545823095660"
+}
+{
+        "_id" : ObjectId("5c23657d7fd09d526413a58f"),
+        "created_at" : "Wed Dec 26 11:18:15 +0000 2018",
+        "id" : NumberLong("1077886303901872129"),
+        "id_str" : "1077886303901872129",
+        "text" : "@krnoth แนะนำเรื่องนี้เลยค่าไม่รู้เคยอ่านหรือยัง https://t.co/yv6IFmuqne",
+        "display_text_range" : [
+                8,
+                48
+        ],
+        "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+        "truncated" : false,
+        "in_reply_to_status_id" : NumberLong("1077838914604298240"),
+        "in_reply_to_status_id_str" : "1077838914604298240",
+        "in_reply_to_user_id" : NumberLong("2834275238"),
+        "in_reply_to_user_id_str" : "2834275238",
+        "in_reply_to_screen_name" : "krnoth",
+        "user" : {
+                "id" : NumberLong("922455486741463040"),
+                "id_str" : "922455486741463040",
+                "name" : "รักกาตุ่ยโดยอง¹²⁷▶วันพระไม่ได้มีหนเดียว▶ลัทธิDOTEN",
+                "screen_name" : "pimpim53290637",
+                "location" : "สมุทรปราการ, ประเทศไทย",
+                "url" : null,
+                "description" : "🐰도영😾텐♥DOTENเอ็นดูน้องแจม",
+                "translator_type" : "none",
+                "protected" : false,
+                "verified" : false,
+                "followers_count" : 28,
+                "friends_count" : 685,
+                "listed_count" : 0,
+                "favourites_count" : 4037,
+                "statuses_count" : 4968,
+                "created_at" : "Mon Oct 23 13:31:41 +0000 2017",
+                "utc_offset" : null,
+                "time_zone" : null,
+                "geo_enabled" : true,
+                "lang" : "th",
+                "contributors_enabled" : false,
+                "is_translator" : false,
+                "profile_background_color" : "F5F8FA",
+                "profile_background_image_url" : "",
+                "profile_background_image_url_https" : "",
+                "profile_background_tile" : false,
+                "profile_link_color" : "1DA1F2",
+                "profile_sidebar_border_color" : "C0DEED",
+                "profile_sidebar_fill_color" : "DDEEF6",
+                "profile_text_color" : "333333",
+                "profile_use_background_image" : true,
+                "profile_image_url" : "http://pbs.twimg.com/profile_images/1076149027199045632/jOFWQyYs_normal.jpg",
+                "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1076149027199045632/jOFWQyYs_normal.jpg",
+                "profile_banner_url" : "https://pbs.twimg.com/profile_banners/922455486741463040/1542620396",
+                "default_profile" : true,
+                "default_profile_image" : false,
+                "following" : null,
+                "follow_request_sent" : null,
+                "notifications" : null
+        },
+        "geo" : null,
+        "coordinates" : null,
+        "place" : {
+                "id" : "009390da610668fe",
+                "url" : "https://api.twitter.com/1.1/geo/id/009390da610668fe.json",
+                "place_type" : "city",
+                "name" : "เทพารักษ์",
+                "full_name" : "เทพารักษ์, ประเทศไทย",
+                "country_code" : "TH",
+                "country" : "ประเทศไทย",
+                "bounding_box" : {
+                        "type" : "Polygon",
+                        "coordinates" : [
+                                [
+                                        [
+                                                100.589056,
+                                                13.603748
+                                        ],
+                                        [
+                                                100.589056,
+                                                13.647771
+                                        ],
+                                        [
+                                                100.655676,
+                                                13.647771
+                                        ],
+                                        [
+                                                100.655676,
+                                                13.603748
+                                        ]
+                                ]
+                        ]
+                },
+                "attributes" : {
+
+                }
+        },
+        "contributors" : null,
+        "is_quote_status" : false,
+        "quote_count" : 0,
+        "reply_count" : 0,
+        "retweet_count" : 0,
+        "favorite_count" : 0,
+        "entities" : {
+                "hashtags" : [ ],
+                "urls" : [ ],
+                "user_mentions" : [
+                        {
+                                "screen_name" : "krnoth",
+                                "name" : "โทโจ",
+                                "id" : NumberLong("2834275238"),
+                                "id_str" : "2834275238",
+                                "indices" : [
+                                        0,
+                                        7
+                                ]
+                        }
+                ],
+                "symbols" : [ ],
+                "media" : [
+                        {
+                                "id" : NumberLong("1077886291876827138"),
+                                "id_str" : "1077886291876827138",
+                                "indices" : [
+                                        49,
+                                        72
+                                ],
+                                "media_url" : "http://pbs.twimg.com/media/DvVr3x-U0AImGP0.jpg",
+                                "media_url_https" : "https://pbs.twimg.com/media/DvVr3x-U0AImGP0.jpg",
+                                "url" : "https://t.co/yv6IFmuqne",
+                                "display_url" : "pic.twitter.com/yv6IFmuqne",
+                                "expanded_url" : "https://twitter.com/pimpim53290637/status/1077886303901872129/photo/1",
+                                "type" : "photo",
+                                "sizes" : {
+                                        "large" : {
+                                                "w" : 996,
+                                                "h" : 2048,
+                                                "resize" : "fit"
+                                        },
+                                        "thumb" : {
+                                                "w" : 150,
+                                                "h" : 150,
+                                                "resize" : "crop"
+                                        },
+                                        "medium" : {
+                                                "w" : 584,
+                                                "h" : 1200,
+                                                "resize" : "fit"
+                                        },
+                                        "small" : {
+                                                "w" : 331,
+                                                "h" : 680,
+                                                "resize" : "fit"
+                                        }
+                                }
+                        }
+                ]
+        },
+        "extended_entities" : {
+                "media" : [
+                        {
+                                "id" : NumberLong("1077886291876827138"),
+                                "id_str" : "1077886291876827138",
+                                "indices" : [
+                                        49,
+                                        72
+                                ],
+                                "media_url" : "http://pbs.twimg.com/media/DvVr3x-U0AImGP0.jpg",
+                                "media_url_https" : "https://pbs.twimg.com/media/DvVr3x-U0AImGP0.jpg",
+                                "url" : "https://t.co/yv6IFmuqne",
+                                "display_url" : "pic.twitter.com/yv6IFmuqne",
+                                "expanded_url" : "https://twitter.com/pimpim53290637/status/1077886303901872129/photo/1",
+                                "type" : "photo",
+                                "sizes" : {
+                                        "large" : {
+                                                "w" : 996,
+                                                "h" : 2048,
+                                                "resize" : "fit"
+                                        },
+                                        "thumb" : {
+                                                "w" : 150,
+                                                "h" : 150,
+                                                "resize" : "crop"
+                                        },
+                                        "medium" : {
+                                                "w" : 584,
+                                                "h" : 1200,
+                                                "resize" : "fit"
+                                        },
+                                        "small" : {
+                                                "w" : 331,
+                                                "h" : 680,
+                                                "resize" : "fit"
+                                        }
+                                }
+                        }
+                ]
+        },
+        "favorited" : false,
+        "retweeted" : false,
+        "possibly_sensitive" : false,
+        "filter_level" : "low",
+        "lang" : "th",
+        "timestamp_ms" : "1545823095666"
+}
