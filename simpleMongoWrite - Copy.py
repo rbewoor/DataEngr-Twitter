@@ -16,7 +16,7 @@ from pymongo import MongoClient
 client = MongoClient('localhost:27017')
 collection = client.TwitterDb1.Timepass1
 
-message = {"name":"Rohit Bewoor","age": 37}
+message = {"name":"name","age": 21}
 collection.insert_one(message)
 #print('{} added to {}'.format(message, collection))
 print('\nDone')
