@@ -1,0 +1,238 @@
+Questions for the data engineering project:
+Query 0)
+Summary info: Total count of documents, Count of Create_type v/s Delete_type
+MONGO SHELL:
+Total count: db.TwitterCol1.find().count()
+Create_type count: db.TwitterCol1.find({"created_at": {$ne: null}}).count()
+Create_type count ALTERNATIVE: db.TwitterCol1.find({"created_at": {"$exists": 1}}).count()
+Delete_type count: db.TwitterCol1.find({"delete": {$ne: null}}).count()
+Delete_type count ALTERNATIVE: db.TwitterCol1.find({"delete": {"$exists": 1}}).count()
+Distinct Handles count THE BAD WAY and this also won't work in Python directly: db.TwitterCol1.distinct("user.id_str").length    #see below to use aggregation with group: http://www.forwardadvance.com/course/mongo/mongo-aggregation/aggregation-count
+Distinct Handle count with aggregate: db.TwitterCol1.aggregate({$group:{_id: '$user.id_str'}}, {$group: {_id: 1, count: {$sum: 1} } } )
+PYTHON CODE:
+TotalDocsCount = collection.count_documents({})
+TotalDocsCreateType = collection.count_documents({"created_at": {"$exists": 1}})
+TotalDocsDeleteType = collection.count_documents({"delete": {"$exists": 1}})
+pipelineQuery0 =[{"$group":{"_id": "$user.id_str"}}, {"$group": {"_id": 1, "count": {"$sum": 1} } }]
+TotalDistinctUsersCursor = collection.aggregate(pipelineQuery0)
+
+db.TwitterCol1.aggregate( { $group:{_id: '$user.id_str'} }, {$group:{_id: 1, count: {$sum: 1}}} )
+> db.TwitterCol1.distinct("user.id_str").length
+21050
+> db.TwitterCol1.aggregate({$group:{_id: '$user.id_str'}}, {$group: {_id: 1, count: {$sum: 1} } } )
+{ "_id" : 1, "count" : 21051 }
+>>>>>>>READABILITY>>>>>>>>>>>>>>db.TwitterCol1.aggregate(
+  {
+    $group: {
+      _id: '$email'
+    }
+  },
+  {
+    $group: {
+      _id: 1,
+      count: {
+        $sum: 1
+      }
+    }
+  }
+)
+
+Query 1)
+Show the top 10 handles by NUMBER OF TWEETS BY USER AS MAINTAINED IN TWITTER RECORDS - NOT BASED ON ACTUAL NUMBER OF TWEETS DOWNLOADED VIA API (from statuses_count field in "user" field)
+MONGO SHELL:
+db.TwitterCol1.find( {}, {"_id" :0, "user.screen_name" :1, "user.statuses_count" :1} ).sort({"user.statuses_count": -1}).limit(10)
+PYTHON CODE:
+cursor = collection.find({"created_at": {"$ne": None}},{"_id" :0, "user.screen_name" :1, "user.statuses_count" :1}).sort([("user.statuses_count", -1)]).limit(10)
+fieldname:
+user.screen_name
+
+Query 2)
+Show the top 10 tweets by the number of LIKES FOR TWEETS
+MONGO SHELL:
+db.TwitterCol1.find( {"created_at": {$ne: null}},{"_id": 0, "user.screen_name": 1 ,"favorite_count": 1}).sort({"favorite_count": -1}).limit(10)
+PYTHON CODE:
+cursor = collection.find( {"created_at": {"$ne": None}},{"_id": 0, "user.screen_name": 1 ,"favorite_count": 1}).sort([("favorite_count", -1)]).limit(10)
+fieldname:
+favorite_count
+
+Query 3)
+Show the top 10 handles by the number of LIKES FOR USER
+MONGO SHELL:
+db.TwitterCol1.find( {}, {"_id" :0, "user.screen_name" :1, "user.favourites_count" :1} ).sort({"user.favourites_count": -1}).limit(10)
+PYTHON CODE:
+cursor = collection.find( {}, {"_id" :0, "user.screen_name" :1, "user.favourites_count" :1} ).sort([("user.favourites_count", -1)]).limit(10)
+fieldname:
+user.favourites_count
+
+Query 0 part more)
+Show Total COUNT OF RETWEETS in the pulled data
+MONGO SHELL:
+db.TwitterCol1.find({"text": {$regex: /^RT /}}).count()
+PYTHON CODE:
+value = collection.count_documents({ "text": {"$regex": "^RT "} })
+
+to verify and display some info
+db.TwitterCol1.find({"text": {$regex: /^RT /}}, {"_id" :0, "user.screen_name" :1, "text" :1}).limit(10)
+
+
+Query 4)
+Show the top 10 user handles by number of times they have tweeted - BASED ON THE DATA PULLED BY OUR PROGRAM (NOT LIKE IN QUERY 1)
+MONGO SHELL:
+db.TwitterCol1.aggregate( {$match: {"created_at": {$exists: 1}}}, {$group: {_id: "$user.screen_name", "NoOfTweets": {$sum: 1}} } , {$sort: {"NoOfTweets": -1}} , {$limit: 10} )
+
+PYTHON CODE:
+pipeline=[ {"$match": {"created_at": {"$exists": 1}}} , {"$group": {"_id": "$user.screen_name", "NoOfTweets": {"$sum": 1}} } , {"$sort": {"NoOfTweets": -1}} , {"$limit": 10}]
+
+pipetest
+aggregate(pipeline)
+
+
+Query 6)
+Summarize the source of the tweets
+MONGO SHELL:
+testing:    in the regex /Twitter Lite<\/a>$/  -- means search for the text "Twitter Lite</a>" and this text is the end of the field. 
+
+searching for <<<<<    Twitter Lite         >>>>>>>>>
+mongo shell query:
+> db.TwitterCol1.aggregate([{$match: {"created_at": {$exists: 1}, "source": {$regex: /Twitter Lite/}}}, {$group: {_id: 1, count: {$sum: 1}}}])
+{ "_id" : 1, "count" : 631 }
+> db.TwitterCol1.aggregate([{$match: {"created_at": {$exists: 1}, "source": {$regex: /Twitter Lite<\/a>$/}}}, {$group: {_id: 1, count: {$sum: 1}}}])
+{ "_id" : 1, "count" : 631 }
+
+PYTHON CODE:
+
+
+DATA from the db query:
+the text appears bounded by the following:  " rel=\"nofollow\">    AND  </a>"
+1 Twitter Lite
+2 Twitter for Android
+3 Twitter for iPhone
+4 Twitter Web Client
+5 Twitter for iPad
+6 TweetDeck
+7 Ore2
+8 Some BOT    >> some examples "BeckBot 2000", "twittbot.net". Note: check this as second last in case just before tagging not identified
+9 SHOWROOM-LIVE
+10 Google
+11 Instagram
+0 Not identified as different language
+---
+1 "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Lite</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+7 "source" : "<a href=\"http://cathand.org\" rel=\"nofollow\">Ore2</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+5 "source" : "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>"
+6 "source" : "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+1 "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Lite</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+9 "source" : "<a href=\"https://www.showroom-live.com\" rel=\"nofollow\">SHOWROOM-LIVE</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+8 "source" : "<a href=\"http://beckbot2000.tumblr.com\" rel=\"nofollow\">BeckBot 2000</a>"
+8 "source" : "<a href=\"http://twittbot.net/\" rel=\"nofollow\">twittbot.net</a>"
+0 "source" : "<a href=\"https://du3a.org/\" rel=\"nofollow\">تطبيق دعـاء</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+5 "source" : "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+4 "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
+3 "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+
+----------------------------
+1a)  additional queries to verify the info shown in main query 5
+			sub queries for information: show Count how many unique User handles are in the pulled data
+			db.TwitterCol1.distinct("user.id_str").length		shows the count of distinct user ids		BUT THIS IS A BAD BAD WAY. If many docs then takes up huge memory. See better way
+			db.TwitterCol1.distinct("user.id_str")				shows the actual list of the individual user ids
+Better way to count distinct values: http://www.forwardadvance.com/course/mongo/mongo-aggregation/aggregation-count
+
+db.TwitterCol1.aggregate( { $group:{_id: '$user.id_str'} }, {$group:{_id: 1, count: {$sum: 1}}} )
+> db.TwitterCol1.distinct("user.id_str").length
+21050
+> db.TwitterCol1.aggregate({$group:{_id: '$user.id_str'}}, {$group: {_id: 1, count: {$sum: 1} } } )
+{ "_id" : 1, "count" : 21051 }
+>>>>>>>>>>>>>>db.TwitterCol1.aggregate(
+  {
+    $group: {
+      _id: '$email'
+    }
+  },
+  {
+    $group: {
+      _id: 1,
+      count: {
+        $sum: 1
+      }
+    }
+  }
+)
+
+6) Think of any additional interesting questions.............
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+count of create v/s delete type records. The total of these should match the total documents in the db.
+
+the collection had 3 total records, 2 were create type and 1 was delete type
+Queries for DELETE_TYPE docs count
+> db.TwitterCol2.find({"created_at": null}).count()
+1
+> db.TwitterCol2.find({"delete": {$ne: null}}).count()
+1
+Queries for CREATE_TYPE docs count
+> db.TwitterCol2.find({"delete": null}).count()
+2
+> db.TwitterCol2.find({"created_at": {$ne: null}}).count()
+2
+
+> db.TwitterCol1.count()
+24749					= 21709 + 3043
+> db.TwitterCol1.find({"created_at": {$ne: null}}).count()
+21706
+> db.TwitterCol1.find({"delete": {$ne: null}}).count()
+3043
+
+2) ???????
+db.TwitterCol1.aggregate(
+    {$group : {_id : "$user", "count" : {$sum : 1}}},
+    {$sort : {"count" : -1}},
+    {$limit : 10}
+)
