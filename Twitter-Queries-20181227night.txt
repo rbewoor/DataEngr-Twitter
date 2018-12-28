@@ -103,19 +103,18 @@ PYTHON CODE:
 
 
 DATA from the db query:
-the text appears bounded by the following:  " rel=\"nofollow\">    AND  </a>"
-1 Twitter Lite
-2 Twitter for Android
-3 Twitter for iPhone
-4 Twitter Web Client
-5 Twitter for iPad
-6 TweetDeck
-7 Ore2
-8 Some BOT    >> some examples "BeckBot 2000", "twittbot.net". Note: check this as second last in case just before tagging not identified
-9 SHOWROOM-LIVE
-10 Google
-11 Instagram
-0 Not identified as different language
+the text appears bounded by the following text:  " rel=\"nofollow\">    AND  </a>"
+01 Twitter Lite
+02 Twitter for Android
+03 Twitter for iPhone
+04 Twitter Web Client
+05 Twitter for iPad
+06 TweetDeck
+07 SHOWROOM-LIVE
+08 Google
+09 Instagram
+10 Others
+10 Some BOT    >> some examples "BeckBot 2000", "twittbot.net". Note: check this as second last in case just before tagging not identified
 ---
 1 "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Lite</a>"
 2 "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>"
