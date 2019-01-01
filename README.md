@@ -9,7 +9,7 @@ Some examples of simple mongo data access to see how the data can be accessed.
 
 Queries.txt has 5 simple queries that are currently coded in native MongoDB shell execution. Need to figure out how to run this via a python program.
 
-PROBLEM FOUND with the way the first 24 hours was read. Simply reading first 316569 messages (discarding the first two as header and blank info) has inserted 316567 docs into mongo. But the dates are outside the PUTime of gte=2018-06-01 00:00:00 and lt=2018-06-02 00:00:00. Only 316188 docs meet this condition. Will need to change consumer to check the date range before proceeding to insert.
+PROBLEM FOUND with the way the first 24 hours was read. Simply reading first 316569 messages (discarding the first two as header and blank info) has inserted 316567 docs into mongo. But the dates are outside the PUTime of gte=2018-06-01 00:00:00 and lt=2018-06-02 00:00:00. Only 316188 docs meet this condition. Will need to change consumer to check the date range before proceeding to insert (readability below is bad but will try to upload a screenshot)
 
 
 > db.TestNYTFullJuneButOnly24hrsCol1.count()
